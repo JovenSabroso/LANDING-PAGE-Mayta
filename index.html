@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DXN SaaS — Gestión de Cafeterías Multisucursal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0F172A;
+      --blue:   #2563EB;
+      --blue2:  #3B82F6;
+      --green:  #059669;
+      --green2: #10B981;
+      --slate:  #64748B;
+      --light:  #F1F5F9;
+      --white:  #FFFFFF;
+      --border: #E2E8F0;
+      --text:   #1E293B;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(8px);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--blue2); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .btn-nav {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover { background: var(--blue2); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: 90px 5% 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      min-height: 88vh;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.18);
+      color: var(--blue2);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      padding: 0.3rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.4rem;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--blue2);
+    }
+    .hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--blue2); transform: translateY(-1px); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+
+    /* ── MOCKUP UI ── */
+    .mockup {
+      background: #1E293B;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+    .mockup-bar {
+      background: #0F172A;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #FF5F57; }
+    .dot.y { background: #FFBD2E; }
+    .dot.g { background: #28C840; }
+    .mockup-url {
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      margin-left: 8px;
+      flex: 1;
+    }
+    .mockup-body { padding: 18px; }
+    .mock-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .mock-title { color: var(--white); font-weight: 700; font-size: 0.95rem; }
+    .mock-badge {
+      background: rgba(5,150,105,0.2);
+      color: #34D399;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .mock-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .mock-stat {
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .mock-stat-label { font-size: 0.65rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+    .mock-stat-val { font-size: 1rem; font-weight: 700; color: var(--white); }
+    .mock-stat-val.g { color: #34D399; }
+    .mock-table { width: 100%; border-collapse: collapse; }
+    .mock-table th {
+      text-align: left;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0 0 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .mock-table td {
+      padding: 7px 0;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .mock-tag {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+    .mock-tag.ok { background: rgba(5,150,105,0.2); color: #34D399; }
+    .mock-tag.warn { background: rgba(245,158,11,0.2); color: #FCD34D; }
+
+    /* ── SECCIÓN GENÉRICA ── */
+    section { padding: 80px 5%; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--navy);
+      margin-bottom: 0.8rem;
+    }
+    .section-sub {
+      color: var(--slate);
+      font-size: 1rem;
+      max-width: 540px;
+      line-height: 1.7;
+    }
+    .section-head { margin-bottom: 50px; }
+
+    /* ── MÓDULOS ── */
+    .modulos { background: var(--light); }
+    .modulos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .mod-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .mod-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .mod-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+    .mod-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+    .mod-card p { font-size: 0.875rem; color: var(--slate); line-height: 1.6; }
+
+    /* ── ROLES ── */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .role-card {
+      border-radius: 12px;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+    }
+    .role-card.admin { border-top: 3px solid var(--blue); }
+    .role-card.gerente { border-top: 3px solid var(--green); }
+    .role-card.vendedor { border-top: 3px solid #F59E0B; }
+    .role-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+    .role-card .role-sub { font-size: 0.8rem; color: var(--slate); margin-bottom: 16px; }
+    .role-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .role-card ul li {
+      font-size: 0.875rem;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .role-card ul li::before { content: '→'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+
+    /* ── TECH ── */
+    .tech { background: var(--navy); color: var(--white); }
+    .tech .section-title { color: var(--white); }
+    .tech .section-sub { color: rgba(255,255,255,0.55); }
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .tech-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tech-pill .dot2 {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--blue2); flex-shrink: 0;
+    }
+    .tech-pill .dot2.g { background: var(--green2); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0A0F1E;
+      color: rgba(255,255,255,0.45);
+      padding: 40px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.82rem;
+    }
+    footer .logo { color: var(--white); font-weight: 800; font-size: 1rem; }
+    footer .logo span { color: var(--blue2); }
+    footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 60px 5%; }
+      .mockup { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">DXN <span>SaaS</span></div>
+  <ul class="nav-links">
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#tecnologia">Tecnología</a></li>
+  </ul>
+  <a href="https://dxncafeteria.com" class="btn-nav" target="_blank">Acceder al sistema →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Proyecto ISI-511 · El Alto, Bolivia</div>
+    <h1>Gestión de cafeterías<br /><em>multisucursal</em> desde<br />una sola plataforma</h1>
+    <p>Sistema web tipo Micro SaaS que centraliza ventas, inventario, clientes y reportes para cafeterías con múltiples sucursales. Sin instalaciones, accesible desde cualquier dispositivo.</p>
+    <div class="hero-btns">
+      <a href="https://dxncafeteria.com" class="btn-primary" target="_blank">
+        Ver sistema en vivo →
+      </a>
+      <a href="https://github.com/jhonn-mayta/dxn-cafeteria-sistemas" class="btn-secondary" target="_blank">
+        Ver en GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- MOCKUP -->
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dot r"></div>
+      <div class="dot y"></div>
+      <div class="dot g"></div>
+      <div class="mockup-url">dxncafeteria.com/dashboard</div>
+    </div>
+    <div class="mockup-body">
+      <div class="mock-header">
+        <span class="mock-title">Dashboard — Sucursal La Ceja</span>
+        <span class="mock-badge">● En línea</span>
+      </div>
+      <div class="mock-stats">
+        <div class="mock-stat">
+          <div class="mock-stat-label">Ventas hoy</div>
+          <div class="mock-stat-val g">Bs 1,240</div>
+        </div>
+        <div class="mock-stat">
+          <div class="mock-stat-label">Transacciones</div>
+          <div class="mock-stat-val">38</div>
+        </div>
+        <div class="mock-stat">
+          <div class="mock-stat-label">Stock bajo</div>
+          <div class="mock-stat-val" style="color:#FCD34D">2</div>
+        </div>
+      </div>
+      <table class="mock-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Vendidos</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Café Americano</td>
+            <td>24</td>
+            <td><span class="mock-tag ok">48 u.</span></td>
+          </tr>
+          <tr>
+            <td>Sandwich Jamón</td>
+            <td>15</td>
+            <td><span class="mock-tag ok">22 u.</span></td>
+          </tr>
+          <tr>
+            <td>Jugo Natural</td>
+            <td>9</td>
+            <td><span class="mock-tag warn">3 u.</span></td>
+          </tr>
+          <tr>
+            <td>Té Verde</td>
+            <td>8</td>
+            <td><span class="mock-tag warn">4 u.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="modulos" id="modulos">
+  <div class="section-head">
+    <div class="section-label">Funcionalidades</div>
+    <h2 class="section-title">Todo lo que necesita tu cafetería</h2>
+    <p class="section-sub">Cinco módulos interconectados que cubren el ciclo operativo completo, desde la venta hasta el análisis de resultados.</p>
+  </div>
+  <div class="modulos-grid">
+    <div class="mod-card">
+      <div class="mod-icon" style="background:#EFF6FF">🔐</div>
+      <h3>Autenticación segura</h3>
+      <p>Acceso con usuario y contraseña. Token JWT de 8 horas con verificación de sucursal activa y control de sesión persistente.</p>
+    </div>
+    <div class="mod-card">
+      <div class="mod-icon" style="background:#F0FDF4">🧾</div>
+      <h3>Registro de ventas</h3>
+      <p>Selección de productos del catálogo, cálculo automático del total, descuento de stock y asignación de puntos al cliente en una sola operación.</p>
+    </div>
+    <div class="mod-card">
+      <div class="mod-icon" style="background:#FFFBEB">📦</div>
+      <h3>Control de inventario</h3>
+      <p>Stock por sucursal con alertas automáticas al alcanzar el umbral mínimo configurable. Actualizaciones manuales por el gerente.</p>
+    </div>
+    <div class="mod-card">
+      <div class="mod-icon" style="background:#FDF4FF">👥</div>
+      <h3>Clientes y fidelización</h3>
+      <p>Base de clientes con historial de compras y sistema de puntos acumulables. Canje de puntos en ventas posteriores.</p>
+    </div>
+    <div class="mod-card">
+      <div class="mod-icon" style="background:#FFF1F2">📊</div>
+      <h3>Reportes por sucursal</h3>
+      <p>Totales de ventas, productos más vendidos y comparativo entre sucursales filtrado por periodo. Acceso exclusivo para gerente y super admin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="section-head">
+    <div class="section-label">Control de acceso</div>
+    <h2 class="section-title">Tres roles, responsabilidades claras</h2>
+    <p class="section-sub">Cada usuario accede únicamente a lo que su rol permite. El aislamiento por negocio garantiza que cada tenant opera de forma independiente.</p>
+  </div>
+  <div class="roles-grid">
+    <div class="role-card admin">
+      <h3>Super Admin</h3>
+      <div class="role-sub">Acceso global a la plataforma</div>
+      <ul>
+        <li>Gestiona todos los negocios registrados</li>
+        <li>Crea y bloquea sucursales</li>
+        <li>Administra usuarios de cualquier negocio</li>
+        <li>Accede a reportes consolidados</li>
+      </ul>
+    </div>
+    <div class="role-card gerente">
+      <h3>Gerente</h3>
+      <div class="role-sub">Gestión del negocio propio</div>
+      <ul>
+        <li>Administra sucursales de su negocio</li>
+        <li>Configura catálogo y stock mínimo</li>
+        <li>Gestiona el equipo de vendedores</li>
+        <li>Consulta reportes y comparativos</li>
+      </ul>
+    </div>
+    <div class="role-card vendedor">
+      <h3>Vendedor</h3>
+      <div class="role-sub">Operación en punto de venta</div>
+      <ul>
+        <li>Registra ventas desde su sucursal</li>
+        <li>Asocia clientes y acumula puntos</li>
+        <li>Consulta stock disponible</li>
+        <li>Accede solo a su sucursal activa</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGÍA -->
+<section class="tech" id="tecnologia">
+  <div class="section-head">
+    <div class="section-label">Stack técnico</div>
+    <h2 class="section-title">Construido para producción</h2>
+    <p class="section-sub">Arquitectura de tres capas desplegada en VPS con PM2, HTTPS y base de datos relacional con aislamiento multi-tenant.</p>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-pill"><span class="dot2"></span> Node.js + Express</div>
+    <div class="tech-pill"><span class="dot2"></span> PostgreSQL</div>
+    <div class="tech-pill"><span class="dot2"></span> JWT Auth</div>
+    <div class="tech-pill"><span class="dot2 g"></span> HTML5 + CSS3 + JS Vanilla</div>
+    <div class="tech-pill"><span class="dot2 g"></span> PM2 Cluster Mode</div>
+    <div class="tech-pill"><span class="dot2"></span> bcrypt · Helmet.js</div>
+    <div class="tech-pill"><span class="dot2"></span> GitHub Actions CI/CD</div>
+    <div class="tech-pill"><span class="dot2 g"></span> VPS Hostinger</div>
+    <div class="tech-pill"><span class="dot2 g"></span> PWA Instalable</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">DXN <span>SaaS</span></div>
+  <div>Ingeniería de Sistemas ISI-511 · Universidad Privada Franz Tamayo · El Alto, Bolivia</div>
+  <div>Estudiante: Jhonn Cristhian Mayta Nina · 2026</div>
+</footer>
+
+</body>
+</html>
