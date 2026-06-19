@@ -622,6 +622,171 @@
     .tech-dot.amber { background: var(--amber); box-shadow: 0 0 8px rgba(245,158,11,0.6); }
     .tech-card span { font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.82); }
 
+    /* ── FORMULARIO DER ── */
+    .form-section { background: var(--light); }
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .form-group .field-map {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--blue);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--light2);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text);
+      background: var(--light);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--blue2);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    }
+    .form-group input::placeholder { color: var(--slate2); }
+    .form-subtitle {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--slate);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--light2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-subtitle .entity-tag {
+      background: rgba(37,99,235,0.1);
+      color: var(--blue);
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+    }
+    .btn-form {
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+      margin-top: 10px;
+    }
+    .btn-form:hover { background: var(--blue2); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,99,235,0.4); }
+    .der-info {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+    .der-info h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .der-info > p {
+      font-size: 0.85rem;
+      color: var(--slate);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .der-map-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .der-map-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--light);
+      border-radius: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--light2);
+      font-size: 0.82rem;
+    }
+    .der-map-item .arrow-map { color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .der-map-item .input-name { font-weight: 600; color: var(--navy); min-width: 140px; }
+    .der-map-item .db-col {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--blue);
+      background: rgba(37,99,235,0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .der-map-item .db-type {
+      font-size: 0.72rem;
+      color: var(--slate2);
+      font-family: 'Courier New', monospace;
+    }
+    .der-note {
+      margin-top: 18px;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.8rem;
+      color: var(--slate);
+      line-height: 1.65;
+    }
+    .der-note strong { color: var(--blue); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .form-success .check-icon {
+      width: 56px; height: 56px;
+      background: rgba(5,150,105,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 16px;
+    }
+    .form-success h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .form-success p { font-size: 0.85rem; color: var(--slate); line-height: 1.65; }
+    @media (max-width: 768px) {
+      .form-layout { grid-template-columns: 1fr; }
+    }
+
     /* ── CTA ── */
     .cta {
       background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 50%, #1E3A8A 100%);
@@ -1017,6 +1182,142 @@
   </div>
 </section>
 
+<!-- FORMULARIO — MAPEO DER -->
+<section class="form-section" id="registro">
+  <div class="section-head reveal">
+    <div class="section-label">Caso de uso · CU-01</div>
+    <h2 class="section-title">Registra tu cafetería en DXN SaaS</h2>
+    <p class="section-sub">Este formulario simula el caso de uso principal del sistema: el registro de un nuevo negocio. Cada campo está mapeado a las entidades del Diagrama Entidad-Relación (DER).</p>
+  </div>
+  <div class="form-layout">
+
+    <!-- FORMULARIO -->
+    <div class="form-card reveal-left">
+      <form id="form-registro" novalidate>
+
+        <div class="form-subtitle">Datos del negocio <span class="entity-tag">→ negocios</span></div>
+        <div class="form-group">
+          <label>Nombre del negocio</label>
+          <span class="field-map">→ negocios.nombre (TEXT, NOT NULL)</span>
+          <input type="text" name="nombre_negocio" placeholder="Ej: Cafetería El Aroma" required />
+        </div>
+        <div class="form-group">
+          <label>Email de contacto</label>
+          <span class="field-map">→ negocios.email_contacto (TEXT)</span>
+          <input type="email" name="email_contacto" placeholder="contacto@mineogcio.com" required />
+        </div>
+
+        <div class="form-subtitle" style="margin-top:24px">Datos del gerente <span class="entity-tag">→ usuarios</span></div>
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <span class="field-map">→ usuarios.nombre (TEXT, NOT NULL)</span>
+          <input type="text" name="nombre_gerente" placeholder="Ej: Juan Pérez" required />
+        </div>
+        <div class="form-group">
+          <label>Email del gerente</label>
+          <span class="field-map">→ usuarios.email (TEXT, NOT NULL, UNIQUE)</span>
+          <input type="email" name="email_gerente" placeholder="juan@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>Nombre de usuario</label>
+          <span class="field-map">→ usuarios.usuario (TEXT, NOT NULL, UNIQUE)</span>
+          <input type="text" name="usuario" placeholder="juanperez" required />
+        </div>
+        <div class="form-group">
+          <label>Rol asignado</label>
+          <span class="field-map">→ usuarios.rol (TEXT, DEFAULT 'vendedor')</span>
+          <select name="rol">
+            <option value="gerente">Gerente</option>
+            <option value="vendedor">Vendedor</option>
+          </select>
+        </div>
+
+        <div class="form-subtitle" style="margin-top:24px">Sucursal principal <span class="entity-tag">→ sucursales</span></div>
+        <div class="form-group">
+          <label>Nombre de la sucursal</label>
+          <span class="field-map">→ sucursales.nombre (TEXT, NOT NULL)</span>
+          <input type="text" name="nombre_sucursal" placeholder="Ej: Sucursal La Ceja" required />
+        </div>
+        <div class="form-group">
+          <label>Dirección</label>
+          <span class="field-map">→ sucursales.direccion (TEXT)</span>
+          <input type="text" name="direccion" placeholder="Av. 6 de Marzo #123, El Alto" />
+        </div>
+
+        <button type="submit" class="btn-form">Registrar negocio →</button>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <div class="check-icon">✅</div>
+        <h3>Registro simulado con éxito</h3>
+        <p>Los datos ingresados se mapearían a las tablas <strong>negocios</strong>, <strong>usuarios</strong> y <strong>sucursales</strong> de la base de datos PostgreSQL del sistema DXN SaaS.</p>
+      </div>
+    </div>
+
+    <!-- MAPEO DER -->
+    <div class="der-info reveal-right">
+      <h3>Mapeo Interfaz → Base de Datos</h3>
+      <p>Cada campo del formulario corresponde a un atributo real del DER del sistema. Al enviar, se simula la inserción de registros en tres entidades relacionadas.</p>
+
+      <ul class="der-map-list">
+        <li class="der-map-item">
+          <span class="input-name">Nombre negocio</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">negocios.nombre</span>
+          <span class="db-type">TEXT</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Email contacto</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">negocios.email_contacto</span>
+          <span class="db-type">TEXT</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Nombre gerente</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">usuarios.nombre</span>
+          <span class="db-type">TEXT</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Email gerente</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">usuarios.email</span>
+          <span class="db-type">TEXT UNIQUE</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Usuario</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">usuarios.usuario</span>
+          <span class="db-type">TEXT UNIQUE</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Rol</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">usuarios.rol</span>
+          <span class="db-type">TEXT</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Nombre sucursal</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">sucursales.nombre</span>
+          <span class="db-type">TEXT</span>
+        </li>
+        <li class="der-map-item">
+          <span class="input-name">Dirección</span>
+          <span class="arrow-map">→</span>
+          <span class="db-col">sucursales.direccion</span>
+          <span class="db-type">TEXT</span>
+        </li>
+      </ul>
+
+      <div class="der-note">
+        <strong>Claves generadas automáticamente:</strong> Los campos <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.8em;">id (UUID PK)</code>, <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.8em;">negocio_id (FK)</code>, <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.8em;">contrasena_hash</code> y <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.8em;">creado_en</code> son generados por el backend y la base de datos — no se capturan en el formulario.
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta">
   <div class="cta-inner reveal">
@@ -1110,6 +1411,19 @@
 
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
     observer.observe(el);
+  });
+
+  // Formulario DER — simulación de registro
+  const formReg = document.getElementById('form-registro');
+  const formSuccess = document.getElementById('form-success');
+  formReg.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!formReg.checkValidity()) {
+      formReg.reportValidity();
+      return;
+    }
+    formReg.style.display = 'none';
+    formSuccess.style.display = 'block';
   });
 </script>
 </body>
