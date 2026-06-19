@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentación Técnica — DXN SaaS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0F172A;
+      --navy2:  #1E293B;
+      --blue:   #2563EB;
+      --blue2:  #3B82F6;
+      --blue3:  #60A5FA;
+      --green:  #059669;
+      --green2: #10B981;
+      --green3: #34D399;
+      --amber:  #F59E0B;
+      --slate:  #64748B;
+      --slate2: #94A3B8;
+      --light:  #F1F5F9;
+      --light2: #E2E8F0;
+      --white:  #FFFFFF;
+      --border: rgba(255,255,255,0.09);
+      --text:   #1E293B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15,23,42,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      color: var(--white);
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-logo span { color: var(--blue3); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .nav-back {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: rgba(255,255,255,0.9); }
+    .btn-nav-sm {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.42rem 1rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .btn-nav-sm:hover { background: var(--blue2); }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 56px 5% 80px;
+    }
+
+    /* ── ENCABEZADO DE PÁGINA ── */
+    .page-header {
+      margin-bottom: 52px;
+    }
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(37,99,235,0.12);
+      color: var(--blue3);
+      border: 1px solid rgba(59,130,246,0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .page-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--blue3);
+      flex-shrink: 0;
+    }
+    .page-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+    }
+    .page-header h1 span {
+      background: linear-gradient(135deg, var(--blue2), var(--blue3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .page-header p {
+      color: rgba(255,255,255,0.52);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 620px;
+    }
+
+    /* ── SECCIONES ── */
+    .doc-section {
+      margin-bottom: 52px;
+    }
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--blue3);
+      margin-bottom: 0.45rem;
+    }
+    .doc-section h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1.1rem;
+      letter-spacing: -0.3px;
+    }
+    .doc-section > p {
+      color: rgba(255,255,255,0.58);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin-bottom: 52px;
+    }
+
+    /* ── CAJA GENERAL ── */
+    .box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 26px 28px;
+    }
+    .box-blue {
+      background: rgba(37,99,235,0.07);
+      border-color: rgba(37,99,235,0.22);
+    }
+    .box-green {
+      background: rgba(5,150,105,0.07);
+      border-color: rgba(5,150,105,0.2);
+    }
+
+    /* ── TARJETAS DE MÓDULOS ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+    }
+    .mod-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 22px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .mod-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .mod-card.ventas::before   { background: linear-gradient(90deg, var(--blue), var(--blue2)); }
+    .mod-card.inventario::before { background: linear-gradient(90deg, #D97706, var(--amber)); }
+    .mod-card.clientes::before { background: linear-gradient(90deg, var(--green), var(--green2)); }
+    .mod-card.reportes::before { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+    .mod-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .mod-icon {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .mod-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .mod-card p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.65;
+    }
+    .mod-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .tag-blue   { background: rgba(37,99,235,0.2);  color: var(--blue3); }
+    .tag-amber  { background: rgba(245,158,11,0.2); color: #FCD34D; }
+    .tag-green  { background: rgba(5,150,105,0.2);  color: var(--green3); }
+    .tag-purple { background: rgba(124,58,237,0.2); color: #C4B5FD; }
+
+    /* ── TABLA ── */
+    .doc-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    thead {
+      background: rgba(255,255,255,0.05);
+    }
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255,255,255,0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      color: rgba(255,255,255,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.025); }
+    td strong { color: var(--white); font-weight: 600; }
+    td .check { color: var(--green3); font-size: 0.9rem; margin-right: 4px; }
+    td .dash  { color: rgba(255,255,255,0.25); }
+
+    /* ── ARQUITECTURA ── */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .arch-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+    .arch-card .arch-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .arch-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .arch-card p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.65;
+    }
+    .arch-stack {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .arch-pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── ENTIDADES ── */
+    .entities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .entity-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .entity-card h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--blue3);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+    .entity-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .entity-card ul li {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Courier New', monospace;
+      display: flex;
+      gap: 6px;
+    }
+    .entity-card ul li .field-type {
+      color: rgba(255,255,255,0.25);
+    }
+    .entity-card ul li .pk  { color: #FCD34D; font-size: 0.68rem; }
+    .entity-card ul li .fk  { color: var(--green3); font-size: 0.68rem; }
+
+    /* ── NOTA TENANT ── */
+    .tenant-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.22);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-top: 14px;
+    }
+    .tenant-note .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .tenant-note p {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+    }
+    .tenant-note p strong { color: var(--blue3); }
+
+    /* ── RECURSOS ── */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .res-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .res-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.16);
+    }
+    .res-icon {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .res-card h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+    .res-card p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.38);
+    }
+    .res-note {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+
+    /* ── ACCESO ── */
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .btn-access {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem 1.4rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+      text-align: center;
+    }
+    .btn-access.primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+    }
+    .btn-access.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,99,235,0.5);
+    }
+    .btn-access.secondary {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-access.secondary:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 22px 5%;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .access-grid { grid-template-columns: 1fr; }
+      .modules-grid { grid-template-columns: 1fr 1fr; }
+      main { padding: 40px 5% 64px; }
+    }
+    @media (max-width: 420px) {
+      .modules-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">DXN <span>SaaS</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← Volver a inicio</a>
+    <a href="sistema.html" class="btn-nav-sm">Acceder →</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ENCABEZADO -->
+  <div class="page-header">
+    <div class="page-badge">Documentación Técnica · Hito 5</div>
+    <h1>Sistema DXN <span>SaaS</span><br />Gestión Multisucursal</h1>
+    <p>Documentación técnica del sistema web tipo Micro SaaS para la gestión de cafeterías con múltiples sucursales. Proyecto académico ISI-511, Universidad Privada Franz Tamayo — El Alto, Bolivia.</p>
+  </div>
+
+  <!-- A. DESCRIPCIÓN GENERAL -->
+  <div class="doc-section">
+    <div class="section-label">A · Descripción General</div>
+    <h2>Problema y solución</h2>
+    <p>Las cafeterías con múltiples puntos de venta carecen de herramientas centralizadas para gestionar ventas, inventario y clientes desde una sola plataforma. El control se realiza manualmente o con hojas de cálculo desconectadas entre sucursales, lo que genera pérdida de información, duplicación de trabajo y dificultad para tomar decisiones basadas en datos reales.</p>
+    <div class="box box-blue">
+      <p style="font-size:0.88rem; color:rgba(255,255,255,0.65); line-height:1.75; margin:0;">
+        <strong style="color:var(--blue3);">Solución SaaS:</strong> Sistema web multi-tenant que centraliza en tiempo real las operaciones de ventas, inventario, clientes y reportes para cafeterías con múltiples sucursales. Accesible desde cualquier dispositivo, sin instalaciones, con aislamiento total de datos entre negocios y control de acceso por roles.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- B. MÓDULOS FUNCIONALES -->
+  <div class="doc-section">
+    <div class="section-label">B · Módulos Funcionales</div>
+    <h2>Cuatro módulos principales</h2>
+    <p>El sistema está organizado en módulos interconectados que cubren el ciclo operativo completo de una cafetería multisucursal.</p>
+    <div class="modules-grid">
+
+      <div class="mod-card ventas">
+        <span class="mod-icon">🧾</span>
+        <span class="mod-tag tag-blue">Ventas</span>
+        <h3>Registro de Ventas</h3>
+        <p>Selección de productos del catálogo, cálculo automático del total, descuento de stock en tiempo real, asignación de puntos al cliente y registro del método de pago (efectivo, QR o mixto) en una sola operación.</p>
+      </div>
+
+      <div class="mod-card inventario">
+        <span class="mod-icon">📦</span>
+        <span class="mod-tag tag-amber">Inventario</span>
+        <h3>Control de Inventario</h3>
+        <p>Stock diferenciado por sucursal con alertas automáticas al alcanzar el umbral mínimo configurable. Registro de movimientos (entradas, salidas, ajustes) con historial auditado por usuario y fecha.</p>
+      </div>
+
+      <div class="mod-card clientes">
+        <span class="mod-icon">👥</span>
+        <span class="mod-tag tag-green">Clientes</span>
+        <h3>Clientes y Fidelización</h3>
+        <p>Base de clientes con historial de compras y sistema de puntos acumulables por ciclos. Los puntos se pueden canjear en ventas posteriores. Registro de deudas y abonos parciales por cliente.</p>
+      </div>
+
+      <div class="mod-card reportes">
+        <span class="mod-icon">📊</span>
+        <span class="mod-tag tag-purple">Reportes</span>
+        <h3>Reportes por Sucursal</h3>
+        <p>Totales de ventas diarias, semanales y mensuales. Productos más vendidos, comparativo entre sucursales y alertas de reposición de stock. Acceso exclusivo para gerente y super administrador.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- C. ROLES DE USUARIO -->
+  <div class="doc-section">
+    <div class="section-label">C · Roles de Usuario</div>
+    <h2>Control de acceso por rol</h2>
+    <p>Cada usuario accede únicamente a las funciones que su rol permite. El aislamiento por <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.85em;">negocio_id</code> garantiza que cada tenant opera de forma completamente independiente.</p>
+    <div class="doc-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Rol</th>
+            <th>Ventas</th>
+            <th>Inventario</th>
+            <th>Clientes</th>
+            <th>Reportes</th>
+            <th>Configuración</th>
+            <th>Negocios globales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Super Administrador</strong>
+              <br /><span style="font-size:0.75rem;color:rgba(255,255,255,0.35);">Acceso global</span>
+            </td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span> Consolidado</td>
+            <td><span class="check">✓</span> Total</td>
+            <td><span class="check">✓</span> Todos</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Gerente</strong>
+              <br /><span style="font-size:0.75rem;color:rgba(255,255,255,0.35);">Gestión del negocio propio</span>
+            </td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span> Edita stock</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span> Su negocio</td>
+            <td><span class="check">✓</span> Su negocio</td>
+            <td><span class="dash">—</span></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Vendedor</strong>
+              <br /><span style="font-size:0.75rem;color:rgba(255,255,255,0.35);">Operación en punto de venta</span>
+            </td>
+            <td><span class="check">✓</span> Registra</td>
+            <td><span class="check">✓</span> Solo consulta</td>
+            <td><span class="check">✓</span> Asocia cliente</td>
+            <td><span class="dash">—</span></td>
+            <td><span class="dash">—</span></td>
+            <td><span class="dash">—</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- D. ARQUITECTURA -->
+  <div class="doc-section">
+    <div class="section-label">D · Arquitectura del Sistema</div>
+    <h2>Arquitectura de tres capas</h2>
+    <p>El sistema sigue una arquitectura cliente-servidor desacoplada. El frontend y el backend son independientes y se comunican exclusivamente a través de la API REST con autenticación JWT.</p>
+    <div class="arch-grid">
+
+      <div class="arch-card">
+        <div class="arch-num" style="background:rgba(37,99,235,0.2);color:var(--blue3);">1</div>
+        <h3>Frontend</h3>
+        <p>SPA (Single Page Application) con HTML, CSS y JavaScript vanilla. Se sirve como archivos estáticos desde Nginx. Implementa PWA instalable con Service Worker para soporte offline básico.</p>
+        <div class="arch-stack">
+          <span class="arch-pill">HTML5</span>
+          <span class="arch-pill">CSS3</span>
+          <span class="arch-pill">JavaScript</span>
+          <span class="arch-pill">PWA</span>
+          <span class="arch-pill">Nginx</span>
+        </div>
+      </div>
+
+      <div class="arch-card">
+        <div class="arch-num" style="background:rgba(5,150,105,0.2);color:var(--green3);">2</div>
+        <h3>Backend</h3>
+        <p>API REST con Node.js y Express. Autenticación con JWT (8 horas), control de roles, rate limiting, helmet.js para seguridad de headers y PM2 en Cluster Mode para alta disponibilidad.</p>
+        <div class="arch-stack">
+          <span class="arch-pill">Node.js</span>
+          <span class="arch-pill">Express</span>
+          <span class="arch-pill">JWT</span>
+          <span class="arch-pill">bcrypt</span>
+          <span class="arch-pill">PM2</span>
+          <span class="arch-pill">helmet.js</span>
+        </div>
+      </div>
+
+      <div class="arch-card">
+        <div class="arch-num" style="background:rgba(245,158,11,0.2);color:#FCD34D;">3</div>
+        <h3>Base de Datos</h3>
+        <p>PostgreSQL con 20 tablas relacionales. Aislamiento multi-tenant mediante <code style="font-size:0.8em;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;">negocio_id</code> en cada tabla. UUIDs como claves primarias. Migraciones versionadas con scripts SQL.</p>
+        <div class="arch-stack">
+          <span class="arch-pill">PostgreSQL</span>
+          <span class="arch-pill">UUID</span>
+          <span class="arch-pill">Multi-tenant</span>
+          <span class="arch-pill">Migraciones</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Diagrama ASCII simplificado -->
+    <div class="box" style="margin-top:14px;">
+      <pre style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.8;overflow-x:auto;font-family:'Courier New',monospace;">
+  ┌──────────────────┐     HTTPS      ┌──────────────────┐     SQL      ┌──────────────────┐
+  │   NAVEGADOR /    │ ─────────────► │   API REST       │ ──────────► │   PostgreSQL     │
+  │   PWA (Nginx)    │                │   Node.js+Express│             │   20 tablas      │
+  │                  │ ◄───────────── │   Puerto 3000    │ ◄────────── │   Multi-tenant   │
+  │  HTML · CSS · JS │    JSON + JWT  │   PM2 Cluster    │             │   VPS Hostinger  │
+  └──────────────────┘                └──────────────────┘             └──────────────────┘
+      Capa Presentación                  Capa Negocio                    Capa Datos</pre>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- E. MODELO DE DATOS -->
+  <div class="doc-section">
+    <div class="section-label">E · Modelo de Datos</div>
+    <h2>Entidades principales</h2>
+    <p>El modelo de datos tiene 20 tablas en total. Las entidades centrales del sistema son las siguientes:</p>
+    <div class="entities-grid">
+
+      <div class="entity-card">
+        <h4>negocios</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li>&nbsp;&nbsp; nombre <span class="field-type">TEXT</span></li>
+          <li>&nbsp;&nbsp; email_contacto <span class="field-type">TEXT</span></li>
+          <li>&nbsp;&nbsp; creado_en <span class="field-type">TIMESTAMPTZ</span></li>
+        </ul>
+      </div>
+
+      <div class="entity-card">
+        <h4>sucursales</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li><span class="fk">FK</span> negocio_id</li>
+          <li><span class="fk">FK</span> gerente_id</li>
+          <li>&nbsp;&nbsp; nombre, activa, bloqueada</li>
+          <li>&nbsp;&nbsp; es_central <span class="field-type">BOOLEAN</span></li>
+        </ul>
+      </div>
+
+      <div class="entity-card">
+        <h4>usuarios</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li><span class="fk">FK</span> negocio_id</li>
+          <li><span class="fk">FK</span> sucursal_id</li>
+          <li>&nbsp;&nbsp; nombre, email, usuario</li>
+          <li>&nbsp;&nbsp; rol <span class="field-type">admin|gerente|vendedor</span></li>
+        </ul>
+      </div>
+
+      <div class="entity-card">
+        <h4>clientes</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li><span class="fk">FK</span> negocio_id</li>
+          <li><span class="fk">FK</span> sucursal_id</li>
+          <li>&nbsp;&nbsp; nombre, telefono</li>
+          <li>&nbsp;&nbsp; puntos_actuales <span class="field-type">INTEGER</span></li>
+        </ul>
+      </div>
+
+      <div class="entity-card">
+        <h4>productos</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li><span class="fk">FK</span> negocio_id</li>
+          <li>&nbsp;&nbsp; nombre, precio, categoria</li>
+          <li>&nbsp;&nbsp; puntos <span class="field-type">NUMERIC</span></li>
+          <li>&nbsp;&nbsp; es_global, activo <span class="field-type">BOOLEAN</span></li>
+        </ul>
+      </div>
+
+      <div class="entity-card">
+        <h4>ventas</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li><span class="fk">FK</span> sucursal_id</li>
+          <li><span class="fk">FK</span> usuario_id</li>
+          <li><span class="fk">FK</span> cliente_id</li>
+          <li>&nbsp;&nbsp; total, estado, metodo_pago</li>
+        </ul>
+      </div>
+
+      <div class="entity-card">
+        <h4>detalle_ventas</h4>
+        <ul>
+          <li><span class="pk">PK</span> id <span class="field-type">UUID</span></li>
+          <li><span class="fk">FK</span> venta_id</li>
+          <li><span class="fk">FK</span> producto_id</li>
+          <li>&nbsp;&nbsp; cantidad <span class="field-type">INTEGER</span></li>
+          <li>&nbsp;&nbsp; precio_unitario, subtotal</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="tenant-note">
+      <span class="icon">🔒</span>
+      <p>
+        <strong>Aislamiento multi-tenant:</strong> Todas las tablas operativas incluyen <strong>negocio_id</strong> como campo discriminador. Cada consulta de la API filtra automáticamente por el <strong>negocio_id</strong> extraído del JWT del usuario autenticado, garantizando que un negocio nunca puede acceder a los datos de otro. Este patrón se aplica en los 13 módulos de la API.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- F. TECNOLOGÍAS -->
+  <div class="doc-section">
+    <div class="section-label">F · Tecnologías Utilizadas</div>
+    <h2>Stack técnico completo</h2>
+    <p>Arquitectura de tres capas desplegada en VPS con CI/CD automatizado mediante GitHub Actions.</p>
+    <div class="doc-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tecnología</th>
+            <th>Versión / Detalle</th>
+            <th>Uso en el sistema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>HTML5</strong></td>
+            <td>Semántico</td>
+            <td>Estructura de todas las páginas del frontend SPA</td>
+          </tr>
+          <tr>
+            <td><strong>CSS3</strong></td>
+            <td>Variables CSS, Flexbox, Grid</td>
+            <td>Diseño responsive, paleta de colores, animaciones</td>
+          </tr>
+          <tr>
+            <td><strong>JavaScript</strong></td>
+            <td>ES2020, Vanilla</td>
+            <td>Lógica del frontend, llamadas a la API, manejo de estado</td>
+          </tr>
+          <tr>
+            <td><strong>Node.js</strong></td>
+            <td>v20 LTS</td>
+            <td>Runtime del servidor backend</td>
+          </tr>
+          <tr>
+            <td><strong>Express</strong></td>
+            <td>v4.x</td>
+            <td>Framework HTTP, rutas de la API REST, middlewares</td>
+          </tr>
+          <tr>
+            <td><strong>PostgreSQL</strong></td>
+            <td>v16</td>
+            <td>Base de datos relacional con 20 tablas y UUIDs</td>
+          </tr>
+          <tr>
+            <td><strong>JWT</strong></td>
+            <td>jsonwebtoken · 8h expiración</td>
+            <td>Autenticación stateless, control de roles y tenant</td>
+          </tr>
+          <tr>
+            <td><strong>bcrypt</strong></td>
+            <td>Salt rounds 10</td>
+            <td>Hash seguro de contraseñas de usuarios</td>
+          </tr>
+          <tr>
+            <td><strong>PM2</strong></td>
+            <td>Cluster Mode</td>
+            <td>Gestión de procesos Node.js, zero-downtime deploys</td>
+          </tr>
+          <tr>
+            <td><strong>Nginx</strong></td>
+            <td>Proxy inverso</td>
+            <td>Servir frontend estático, proxy al backend, rate limiting</td>
+          </tr>
+          <tr>
+            <td><strong>GitHub Actions</strong></td>
+            <td>CI/CD</td>
+            <td>Deploy automático al VPS en cada push a main</td>
+          </tr>
+          <tr>
+            <td><strong>Prometheus</strong></td>
+            <td>prom-client</td>
+            <td>Métricas del sistema: latencia HTTP, memoria, uptime</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- G. RECURSOS -->
+  <div class="doc-section">
+    <div class="section-label">G · Recursos del Proyecto</div>
+    <h2>Documentación y artefactos</h2>
+    <p>Todos los documentos técnicos del proyecto académico están disponibles como entregables del curso ISI-511.</p>
+    <div class="resources-grid">
+
+      <div class="res-card" style="cursor:default;">
+        <div class="res-icon" style="background:rgba(124,58,237,0.15);">📐</div>
+        <div>
+          <h4>Diagramas UML</h4>
+          <p>Casos de uso, secuencia y clases</p>
+        </div>
+      </div>
+
+      <div class="res-card" style="cursor:default;">
+        <div class="res-icon" style="background:rgba(37,99,235,0.15);">🗂️</div>
+        <div>
+          <h4>DER — Modelo Entidad-Relación</h4>
+          <p>20 tablas · Notación Crow's Foot</p>
+        </div>
+      </div>
+
+      <div class="res-card" style="cursor:default;">
+        <div class="res-icon" style="background:rgba(5,150,105,0.15);">📖</div>
+        <div>
+          <h4>Manual Técnico</h4>
+          <p>Instalación, configuración y API</p>
+        </div>
+      </div>
+
+      <div class="res-card" style="cursor:default;">
+        <div class="res-icon" style="background:rgba(245,158,11,0.15);">📋</div>
+        <div>
+          <h4>Manual de Usuario</h4>
+          <p>Guía de operación por rol</p>
+        </div>
+      </div>
+
+      <div class="res-card" style="cursor:default;">
+        <div class="res-icon" style="background:rgba(239,68,68,0.15);">🧪</div>
+        <div>
+          <h4>Casos de Prueba</h4>
+          <p>TC-001 a TC-032 · Caja negra</p>
+        </div>
+      </div>
+
+      <div class="res-card" href="https://github.com/JovenSabroso/LANDING-PAGE-Mayta" target="_blank" style="cursor:default;">
+        <div class="res-icon" style="background:rgba(255,255,255,0.07);">⚙️</div>
+        <div>
+          <h4>Código Fuente</h4>
+          <p>Repositorio GitHub del proyecto</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="res-note">
+      Los documentos técnicos son entregables académicos del Hito 5 — ISI-511, Universidad Privada Franz Tamayo, El Alto, Bolivia. Autor: Jhonn Cristhian Mayta Nina · 2026.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- H. ACCESO AL SISTEMA -->
+  <div class="doc-section">
+    <div class="section-label">H · Acceso al Sistema</div>
+    <h2>Accede o vuelve al inicio</h2>
+    <p>El sistema está desplegado en producción en un VPS Hostinger. El acceso directo puede mostrar una advertencia SSL al no contar aún con dominio registrado.</p>
+    <div class="access-grid">
+      <a href="sistema.html" class="btn-access primary">
+        Acceder al sistema →
+      </a>
+      <a href="index.html" class="btn-access secondary">
+        ← Volver a la landing
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  DXN SaaS · Documentación Técnica · ISI-511 · Universidad Privada Franz Tamayo · El Alto, Bolivia · Jhonn Cristhian Mayta Nina · 2026
+</footer>
+
+</body>
+</html>
